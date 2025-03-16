@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'image/image.png' %}" />
+    <title>RUFA Confession</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+        overflow: hidden;
+      }
+
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507);
+        max-width: 500px;
+        width: 100%;
+      }
+
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+      }
+
+      h2 {
+        color: #333;
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+
+      textarea {
+        width: 95%;
+        height: 120px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+        font-size: 14px;
+      }
+
+      input[type="file"] {
+        margin-top: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+      }
+      button {
+        border: none;
+        outline: none;
+        background-color: #ff5733;
+        padding: 12px 20px;
+        margin-top: 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #c13b1a;
+      }
+
+      button:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #8a2712;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 10px 0;
+        text-align: left;
+        color: #555;
+      }
+
+      li {
+        margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 1.6;
+        padding-left: 20px;
+      }
+
+      li,
+      ul {
+        font-family: "Khmer OS", sans-serif;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+          width: 90%;
+        }
+
+        h2 {
+          font-size: 20px;
+        }
+
+        textarea {
+          height: 100px;
+          font-size: 13px;
+          width: 90%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 15px;
+        }
+
+        img {
+          width: 60px;
+          height: 60px;
+        }
+
+        h2 {
+          font-size: 18px;
+        }
+
+        textarea {
+          height: 90px;
+          font-size: 12px;
+        }
+        ul,
+        li {
+          font-size: 12px;
+          padding-left: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="{% static 'image/image.png' %}" alt="logo" />
+      <h2>Submit Your Confession</h2>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <textarea
+          name="text"
+          id="confession"
+          placeholder="Write your confession here..."
+          required
+        ></textarea>
+        <ul>
+          សូមស្វាគមន៍មកកាន់ Rith Confession យើងមានលក្ខខ័ណ្ឌមួយចំនួន
+          មិនអនុញ្ញាតឲ្យបរិហារកេរ្តិ៍នរណាម្នាក់បែបចំៗ
+        </ul>
+
+        <li>
+          ការប្រើប្រាស់ពាក្យមិនសមរម្យ -ហាមបរិហារកេរ្តិ៍ចំៗ
+          -ហាមប្រេីពាក្យសម្តីមិនសមរម្យ ឬ ជេរ -គោរពអ្នកដទៃ -កុំ submit
+          ច្រើនដងខ្ញុំឃើញខ្ញុំនឹង remove
+        </li>
+        <li>
+          ប្រសិនបើខុសពីលក្ខខ័ណ្ឌខាងលើនេះ ពួកយើងនឹងមិន accept confession នោះឡើយ
+        </li>
+        <br />
+        <!-- <input type="file" name="image" accept="image/*" /><br /> -->
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const confession = document.querySelector("#confession").value;
+        if (confession.trim() === "") {
+          Swal.fire({
+            title: "Please write your confession!",
+            icon: "error",
+          });
+        } else {
+          Swal.fire({
+            title: "Success",
+            text: "Your confession has been submitted!",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+            willClose: () => {
+              form.submit();
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
