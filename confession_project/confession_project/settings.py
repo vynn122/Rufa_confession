@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pizluo!ozq$yf*&8%&nu284i)#%6aqe9uz%p0f1sbtl#)e-grz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['rufaconfession.up.railway.app', 'localhost', 'http://127.0.0.1']
+ALLOWED_HOSTS = ['rufaconfession.up.railway.app', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['htpps://rufaconfession.up.railway.app']  
 
 # Application definition
